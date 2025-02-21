@@ -16,5 +16,5 @@
 ![image](https://github.com/MingYueRuYa/QtDemoStydy/blob/master/res/custom_menu.gif)
 
 ## 呼吸灯
-![image](https://gitee.com/liushixiong/qt-demo/blob/master/res/fade.gif)
+![image](https://github.com/MingYueRuYa/QtDemo/blob/master/res/breath_light.gif)
 
