@@ -20,3 +20,6 @@
 ## 窗口渐变效果
 ![image](https://github.com/MingYueRuYa/QtDemo/blob/master/res/fade.gif)
 
+## 移动动画
+![image](https://github.com/MingYueRuYa/QtDemo/blob/master/res/animation_move.gif)
+
