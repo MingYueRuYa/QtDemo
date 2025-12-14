@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>ControlDemoClass</class>
+ <widget class="QMainWindow" name="ControlDemoClass">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>600</width>
+    <height>400</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>ControlDemo</string>
+  </property>
+  <widget class="QWidget" name="centralWidget">
+   <layout class="QHBoxLayout" name="horizontalLayout">
+    <item>
+     <widget class="QTabWidget" name="tabWidget">
+      <property name="styleSheet">
+       <string notr="true">QTabWidget::pane {
+    border: 1px solid #dcdcdc;
+}
+
+QTabBar::tab {
+    height: 40px;
+    width: 140px;
+    background: #f5f5f5;
+    margin: 2px;
+    border-radius: 4px;
+    writing-mode: horizontal-tb;
+
+}
+
+QTabBar::tab:selected {
+    background: #409EFF;
+    color: white;
+    font-weight: bold;
+}
+
+QTabBar::tab:hover {
+    background: #e6f2ff;
+}
+
+
+
+</string>
+      </property>
+      <property name="tabPosition">
+       <enum>QTabWidget::West</enum>
+      </property>
+      <property name="currentIndex">
+       <number>0</number>
+      </property>
+      <widget class="QWidget" name="tab">
+       <attribute name="title">
+        <string>Button</string>
+       </attribute>
+       <widget class="StateButton" name="pushButton">
+        <property name="geometry">
+         <rect>
+          <x>10</x>
+          <y>30</y>
+          <width>75</width>
+          <height>23</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>PushButton</string>
+        </property>
+       </widget>
+      </widget>
+      <widget class="QWidget" name="tab_2">
+       <attribute name="title">
+        <string>Tab 2</string>
+       </attribute>
+      </widget>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+ </widget>
+ <layoutdefault spacing="6" margin="11"/>
+ <customwidgets>
+  <customwidget>
+   <class>StateButton</class>
+   <extends>QPushButton</extends>
+   <header>./Button/statebutton.h</header>
+  </customwidget>
+ </customwidgets>
+ <resources>
+  <include location="ControlDemo.qrc"/>
+ </resources>
+ <connections/>
+</ui>
