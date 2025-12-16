@@ -45,6 +45,9 @@
     <QtMoc Include="main.cpp">
       <Filter>Source Files</Filter>
     </QtMoc>
+    <QtMoc Include="Button\animation_button.hpp">
+      <Filter>Button</Filter>
+    </QtMoc>
   </ItemGroup>
   <ItemGroup>
     <QtUic Include="ControlDemo.ui">

@@ -4,6 +4,9 @@
 #include <QPainter>
 #include <QProxyStyle>
 #include <QStyleOptionTab>
+#include <QDebug>
+#include <QButtonGroup>
+#include <deque>
 
 const int kTAB_ITEM_WIDTH = 120;
 const int kTAB_ITEM_HEIGHT = 40;
@@ -70,4 +73,44 @@ ControlDemo::ControlDemo(QWidget *parent)
     ui.tabWidget->setTabPosition(QTabWidget::West);
     ui.tabWidget->tabBar()->setStyle(new CustomTabStyle());
     ui.tabWidget->setStyleSheet(R"(QTabWidget::pane { border: 1px solid #dcdcdc;})");
+
+    _init_btn();
 }
+
+void ControlDemo::on_test_state_btn_clicked() {
+  static std::deque<StateButton::State> dequeState = {
+      StateButton::State::Loading, StateButton::State::Success,
+      StateButton::State::Normal};
+  auto cur = dequeState.front();
+  ui.stateButton->setState(cur);
+  dequeState.pop_front();
+  dequeState.push_back(cur);
+}
+
+
+void ControlDemo::_init_btn() { 
+  ui.stateButton->setState(StateButton::State::Normal); 
+
+  QString btn_style = R"(QPushButton {
+    border: 1px solid #dcdfe6;
+    padding: 6px 12px;
+}
+QPushButton:checked {
+    background-color: #409EFF;
+    color: white;
+})";
+
+  QButtonGroup *group = new QButtonGroup(this);
+  std::vector<QPushButton *> vec_btn = {ui.pushButton_1, ui.pushButton_2,
+                                        ui.pushButton_3};
+  for (int i = 0; i < vec_btn.size(); ++i) {
+    QPushButton *btn = vec_btn[i];
+    btn->setStyleSheet(btn_style);
+    btn->setCheckable(true);
+    btn->setProperty("mode", i);
+    group->addButton(btn, i);
+  }
+    connect(group, &QButtonGroup::idClicked, this,
+            [](int id) { qDebug() << "current mode:"<< id; });
+}
+

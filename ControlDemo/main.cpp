@@ -3,41 +3,11 @@
 #include <QPushButton>
 // main.cpp
 #include <QtWidgets>
+#include "Button/animation_button.hpp"
+
 #pragma execution_character_set("utf-8")
 
-class HoverOpacityButton : public QPushButton {
-    Q_OBJECT
-public:
-    explicit HoverOpacityButton(const QString& text, QWidget* parent = nullptr)
-        : QPushButton(text, parent) {
-        setAttribute(Qt::WA_Hover, true);
-        auto* eff = new QGraphicsOpacityEffect(this);
-        eff->setOpacity(0.9);
-        setGraphicsEffect(eff);
-    }
-protected:
-    bool event(QEvent* e) override {
-        if (e->type() == QEvent::Enter || e->type() == QEvent::HoverEnter) {
-            animateTo(1.0);
-        }
-        else if (e->type() == QEvent::Leave || e->type() == QEvent::HoverLeave) {
-            animateTo(0.7);
-        }
-        return QPushButton::event(e);
-    }
-private:
-    void animateTo(qreal end) {
-        auto* eff = qobject_cast<QGraphicsOpacityEffect*>(graphicsEffect());
-        if (!eff) return;
-        auto* a = new QPropertyAnimation(eff, "opacity", eff);
-        a->setDuration(140);
-        a->setEasingCurve(QEasingCurve::OutCubic);
-        a->setStartValue(eff->opacity());
-        a->setEndValue(end);
-        connect(a, &QPropertyAnimation::finished, a, &QObject::deleteLater);
-        a->start();
-    }
-};
+
 
 class ColorFadeButton : public QPushButton {
     Q_OBJECT
@@ -93,7 +63,7 @@ protected:
     void mousePressEvent(QMouseEvent* e) override {
         rippleCenter = e->pos();
         startRipple();
-        animateBounce();
+        //animateBounce();
         QPushButton::mousePressEvent(e);
     }
     void paintEvent(QPaintEvent* e) override {
@@ -176,6 +146,7 @@ int main(int argc, char* argv[]) {
     btnFade->setGraphicsEffect(fadeEff);
 
     auto* btnColor = new ColorFadeButton(QStringLiteral("颜色渐变"));
+    btnColor->setBg("#FF00FF");
     auto* btnRipple = new RippleButton(QStringLiteral("波纹 + 弹跳"));
 
     layout->addWidget(btnHover);
